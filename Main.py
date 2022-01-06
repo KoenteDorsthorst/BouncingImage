@@ -6,8 +6,8 @@ pygame.init()
 
 screen = pygame.display.set_mode((800, 800))
 
-imageX = 20
-imageY = 20
+imageX = 10
+imageY = 60
 imageWidth = 100
 imageHeight = 100
 imageImage = pygame.image.load('block.png')
