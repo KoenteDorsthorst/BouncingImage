@@ -30,21 +30,8 @@ class Image:
 
         # changedX = self.changeAngle(self.xSpeed)
         # changedY = self.changeAngle(self.ySpeed)
-        # Bounce right side
-        if self.x >= self.screenWidth - self.width:
-            changedX = self.changeAngle(self.xSpeed)
-            self.xSpeed = -changedX
-
-
-            makeMin = False
-            if self.ySpeed < 0:
-                makeMin = True
-            self.ySpeed = 0.2 - abs(self.xSpeed)
-            if makeMin:
-                self.ySpeed *= -1
-
-        # Bounce left side
-        if self.x <= 0:
+        # Bounce horizontal
+        if self.x >= self.screenWidth - self.width or self.x <= 0:
             changedX = self.changeAngle(self.xSpeed)
             self.xSpeed = -changedX
 
@@ -55,8 +42,9 @@ class Image:
             if makeMin:
                 self.ySpeed *= -1
 
-        # Bounce bottom side
-        if self.y >= self.screenHeight - self.height:
+
+        # Bounce vertical
+        if self.y >= self.screenHeight - self.height or self.y <= 0:
             changedY = self.changeAngle(self.ySpeed)
             self.ySpeed = -changedY
 
@@ -67,17 +55,6 @@ class Image:
             if makeMin:
                 self.xSpeed *= -1
 
-        # Bounce top side
-        if self.y <= 0:
-            changedY = self.changeAngle(self.ySpeed)
-            self.ySpeed = -changedY
-
-            makeMin = False
-            if self.xSpeed < 0:
-                makeMin = True
-            self.xSpeed = 0.2 - abs(self.ySpeed)
-            if makeMin:
-                self.xSpeed *= -1
 
     def changeAngle(self, angle):
         randomNumber = random.randrange(-100, 100)
