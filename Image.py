@@ -2,10 +2,11 @@ import random
 
 class Image:
 
-    screenWidth = 800
-    screenHeight = 800
-    xSpeed = 0.1
-    ySpeed = 0.1
+    screenWidth = 0
+    screenHeight = 0
+    totalSpeed = 1
+    xSpeed = totalSpeed / 2
+    ySpeed = totalSpeed / 2
 
     def __init__(self, xStart, yStart, width, height, image):
         self.x = xStart
@@ -26,10 +27,17 @@ class Image:
         self.x += self.xSpeed
         self.y += self.ySpeed
 
+        if self.x < 0:
+            self.x = 0
+        if self.x > self.screenWidth - self.width:
+            self.x = self.screenWidth - self.width
+        if self.y < 0:
+            self.y = 0
+        if self.y > self.screenHeight - self.height:
+            self.y = self.screenHeight - self.height
+
     def bounce(self):
 
-        # changedX = self.changeAngle(self.xSpeed)
-        # changedY = self.changeAngle(self.ySpeed)
         # Bounce horizontal
         if self.x >= self.screenWidth - self.width or self.x <= 0:
             changedX = self.changeAngle(self.xSpeed)
@@ -38,7 +46,7 @@ class Image:
             makeMin = False
             if self.ySpeed < 0:
                 makeMin = True
-            self.ySpeed = 0.2 - abs(self.xSpeed)
+            self.ySpeed = self.totalSpeed - abs(self.xSpeed)
             if makeMin:
                 self.ySpeed *= -1
 
@@ -51,17 +59,20 @@ class Image:
             makeMin = False
             if self.xSpeed < 0:
                 makeMin = True
-            self.xSpeed = 0.2 - abs(self.ySpeed)
+            self.xSpeed = self.totalSpeed - abs(self.ySpeed)
             if makeMin:
                 self.xSpeed *= -1
 
 
     def changeAngle(self, angle):
         randomNumber = random.randrange(-100, 100)
-        randomNumber *= 0.0001
-        print("-------------")
-        print(randomNumber)
-        print(abs(self.xSpeed) + abs(self.ySpeed))
+        randomNumber *= 0.0002
         angle += randomNumber
+
+        if abs(angle) <= self.totalSpeed/10 or abs(angle) >= self.totalSpeed/10 * 9:
+            if angle < 0:
+                angle = -(self.totalSpeed/2)
+            else:
+                angle = self.totalSpeed/2
         return angle
 
