@@ -1,8 +1,9 @@
-import random
+
 
 import pygame
 
 from Image import Image
+from ImageFactory import ImageFactory
 
 pygame.init()
 
@@ -14,20 +15,15 @@ Image.screenHeight = screenHeight
 
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 
-imageX = 10
-imageY = 60
-imageWidth = 100
-imageHeight = 100
-imageImage = pygame.image.load('block.png')
+
+imageAmount = 6
 
 
 imageList = []
 
-for i in range(6):
-    imageX = random.randrange(0, screenWidth - imageWidth)
-    imageY = random.randrange(0, screenHeight - imageHeight)
-
-    image = Image(imageX, imageY, imageWidth, imageHeight, imageImage)
+for i in range(imageAmount):
+    factory = ImageFactory()
+    image = factory.makeImage(screenWidth, screenHeight)
     imageList.append(image)
 
 

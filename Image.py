@@ -65,8 +65,10 @@ class Image:
 
 
     def changeAngle(self, angle):
-        randomNumber = random.randrange(-100, 100)
-        randomNumber *= 0.0002
+        randomizerLimit = 100
+        randomNumberMultiplier = 0.0002
+        randomNumber = random.randrange(-randomizerLimit, randomizerLimit)
+        randomNumber *= randomNumberMultiplier
         angle += randomNumber
 
         if abs(angle) <= self.totalSpeed/10 or abs(angle) >= self.totalSpeed/10 * 9:
